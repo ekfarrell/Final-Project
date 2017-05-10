@@ -1,11 +1,5 @@
-import java.awt.Color;
-import java.awt.Graphics;
-import java.util.Random;
-import java.awt.Component;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.*;
+import java.util.*;
 
 public class Player extends GameObject{
 
@@ -31,6 +25,15 @@ public class Player extends GameObject{
     public void render(Graphics g){
         g.setColor(Color.red);
         g.fillPolygon(xArray, yArray,5);
+    }
+    
+    public void rotate(int degrees){
+        int newx = (int)Math.cos(degrees+90)*15;
+        int newy = (int)Math.sin(degrees+90)*15;
+        
+        for(int i = 0; i < this.xArray.length; i++){
+           //this.xArray[i] 
+        }
     }
 
 }
