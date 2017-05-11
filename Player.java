@@ -1,6 +1,7 @@
 import java.awt.*;
+import javax.swing.*;
 import java.util.*;
-
+import java.awt.geom.*;
 public class Player extends GameObject{
 
     Random r = new Random();
@@ -23,8 +24,14 @@ public class Player extends GameObject{
     }
     
     public void render(Graphics g){
+        Graphics2D g2d = (Graphics2D)g;
         g.setColor(Color.red);
+        AffineTransform old = g2d.getTransform();
+        g2d.rotate(Math.toRadians(degrees-90 * -1));
+        //draw shape/image (will be rotated)
         g.fillPolygon(xArray, yArray,5);
+        g2d.setTransform(old);
+        
     }
     
     public void rotate(int degrees){
