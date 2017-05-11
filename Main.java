@@ -112,27 +112,49 @@ public class Main {
         //if arrow key is pressed it modifies x and y respectively
         if(handler.isKeyDown(KeyEvent.VK_RIGHT))
         {
-            degrees+=2;
+            degrees+=4;
              //player1.setVelX(2);
               
         }
         if(handler.isKeyDown(KeyEvent.VK_LEFT))
         {
-            degrees-=2;
+            degrees-=4;
              //player1.setVelX(-2);
               
         }
         if(handler.isKeyDown(KeyEvent.VK_UP))
         {
-            y-=5;
+            // y-= Math.sin(Math.toRadians((degrees+90)*-1));
+           // x+= Math.cos(Math.toRadians((degrees+90)*-1));
           //player1.setVelY(-2);
+           x += Math.cos(Math.toRadians((degrees-120)*-1)) *  5 + Math.sin(Math.toRadians((degrees-120)*-1)) * 5;
+           y -= -Math.cos(Math.toRadians((degrees-120)*-1)) * 5 + Math.sin(Math.toRadians((degrees-120)*-1)) * 5;
+           if(x<15)
+                x = 15;
+           if(x>gameWidth)
+                x = gameWidth;
+           if(y<30)
+                y = 30;
+           if(y>gameWidth)
+                y = gameHeight;
+           
            
         }
         if(handler.isKeyDown(KeyEvent.VK_DOWN))
         {
-            y+=5;
+           // y+= Math.sin(Math.toRadians((degrees+90)*-1));
+            // x-= Math.cos(Math.toRadians((degrees+90)*-1));
            //player1.setVelY(2);
-            
+           x -= Math.cos(Math.toRadians((degrees-120)*-1)) *  5 + Math.sin(Math.toRadians((degrees-120)*-1)) * 5;
+           y += -Math.cos(Math.toRadians((degrees-120)*-1)) * 5 + Math.sin(Math.toRadians((degrees-120)*-1)) * 5;
+            if(x<15)
+                x = 15;
+           if(x>gameWidth)
+                x = gameWidth;
+           if(y<30)
+                y = 30;
+           if(y>gameWidth)
+                y = gameHeight;
         }
         if(handler.isMouseDown(1)){
             x = handler.getEvent(1).getX() - shapeLength/2;

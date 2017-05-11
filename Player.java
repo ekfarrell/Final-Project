@@ -27,7 +27,7 @@ public class Player extends GameObject{
         Graphics2D g2d = (Graphics2D)g;
         g.setColor(Color.red);
         AffineTransform old = g2d.getTransform();
-        g2d.rotate(Math.toRadians(degrees-90 * -1));
+        g2d.rotate(Math.toRadians(degrees),x,y);
         //draw shape/image (will be rotated)
         g.fillPolygon(xArray, yArray,5);
         g2d.setTransform(old);

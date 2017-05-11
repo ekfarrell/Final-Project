@@ -1,6 +1,0 @@
-#BlueJ class context
-comment0.params=width\ height\ title\ game
-comment0.target=Window(int,\ int,\ java.lang.String,\ Game)
-comment1.params=
-comment1.target=javax.swing.JFrame\ getFrame()
-numComments=2
