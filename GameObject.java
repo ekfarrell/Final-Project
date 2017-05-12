@@ -7,6 +7,7 @@ public abstract class GameObject {
 	protected ID id;
 	protected int velX, velY;
 	protected int degrees;
+	protected int angularVelocity;
 	
 	public GameObject(int x, int y, int degrees, ID id){
 		this.x = x;
@@ -64,5 +65,13 @@ public abstract class GameObject {
 	
 	public void setDegrees(int degrees){
 		this.degrees = degrees;
+	}
+	
+	public int getAngularVelocity(){
+		return angularVelocity;
+	}
+	
+	public void setAngularVelocity(int angularVelocity){
+		this.angularVelocity = angularVelocity;
 	}
 }

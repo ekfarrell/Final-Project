@@ -79,7 +79,7 @@ public class Main {
      */
     void run(){
         init();
-         
+        player1 = new Player(x,y,degrees,ID.Player);
         //Make the game run until the window is closed
         while(true){
             //gets the current time
@@ -109,57 +109,66 @@ public class Main {
      * Changes the coordinates of the shape based on input
      */
     void update(){
-        //if arrow key is pressed it modifies x and y respectively
+        //if the right arrow key is pressed
         if(handler.isKeyDown(KeyEvent.VK_RIGHT))
         {
-            degrees+=4;
-             //player1.setVelX(2);
-              
+            //degrees+=4;
+            player1.setAngularVelocity(4);
+            player1.tick();
+            player1.setAngularVelocity(0);
         }
+        //if the left arrow key is down
         if(handler.isKeyDown(KeyEvent.VK_LEFT))
         {
-            degrees-=4;
-             //player1.setVelX(-2);
-              
+            //degrees-=4;
+            player1.setAngularVelocity(-4);
+            player1.tick();
+            player1.setAngularVelocity(0);
         }
+        //if the up arrow key is down
         if(handler.isKeyDown(KeyEvent.VK_UP))
         {
-            // y-= Math.sin(Math.toRadians((degrees+90)*-1));
-           // x+= Math.cos(Math.toRadians((degrees+90)*-1));
-          //player1.setVelY(-2);
-           x += Math.cos(Math.toRadians((degrees-120)*-1)) *  5 + Math.sin(Math.toRadians((degrees-120)*-1)) * 5;
-           y -= -Math.cos(Math.toRadians((degrees-120)*-1)) * 5 + Math.sin(Math.toRadians((degrees-120)*-1)) * 5;
-           if(x<15)
+          // x += Math.cos(Math.toRadians((degrees-120)*-1)) *  5 + Math.sin(Math.toRadians((degrees-120)*-1)) * 5;
+          //y -= -Math.cos(Math.toRadians((degrees-120)*-1)) * 5 + Math.sin(Math.toRadians((degrees-120)*-1)) * 5;
+          player1.setVelX(5);
+          player1.setVelY(-5);
+          player1.tick();
+          player1.setVelX(0);
+          player1.setVelY(0);
+           /*if(x<15)
                 x = 15;
            if(x>gameWidth)
                 x = gameWidth;
            if(y<30)
                 y = 30;
            if(y>gameWidth)
-                y = gameHeight;
-           
-           
+                y = gameHeight;   */     
         }
+        //If the down arrow key is down
         if(handler.isKeyDown(KeyEvent.VK_DOWN))
         {
-           // y+= Math.sin(Math.toRadians((degrees+90)*-1));
-            // x-= Math.cos(Math.toRadians((degrees+90)*-1));
-           //player1.setVelY(2);
-           x -= Math.cos(Math.toRadians((degrees-120)*-1)) *  5 + Math.sin(Math.toRadians((degrees-120)*-1)) * 5;
-           y += -Math.cos(Math.toRadians((degrees-120)*-1)) * 5 + Math.sin(Math.toRadians((degrees-120)*-1)) * 5;
-            if(x<15)
+          player1.setVelX(-5);
+          player1.setVelY(5);
+          player1.tick();
+          player1.setVelX(0);
+          player1.setVelY(0);
+           //x -= Math.cos(Math.toRadians((degrees-120)*-1)) *  5 + Math.sin(Math.toRadians((degrees-120)*-1)) * 5;
+           //y += -Math.cos(Math.toRadians((degrees-120)*-1)) * 5 + Math.sin(Math.toRadians((degrees-120)*-1)) * 5;
+           /* if(x<15)
                 x = 15;
            if(x>gameWidth)
                 x = gameWidth;
            if(y<30)
                 y = 30;
            if(y>gameWidth)
-                y = gameHeight;
+                y = gameHeight;*/
         }
-        if(handler.isMouseDown(1)){
+        //Moves the ship to where you click
+        /*if(handler.isMouseDown(1)){
             x = handler.getEvent(1).getX() - shapeLength/2;
             y = handler.getEvent(1).getY() - shapeLength/2;
-        }
+        }*/
+        //If the escape key is pressed it exits the game
         if(handler.isKeyDown(KeyEvent.VK_ESCAPE))
         {
             System.exit(-1);
@@ -170,20 +179,11 @@ public class Main {
      * Draws the shapes onto the image
      */
     void draw(){ 
-       player1 = new Player(x,y,degrees,ID.Player);
+       
         //sets color to black and draws it to the size of the frame on the buffered image
-        
         g.setColor(Color.black);
         g.fillRect(0, 0, gameWidth, gameHeight);
-        Graphics2D g2d = (Graphics2D)g;
-       
         player1.render(g);
-       
-        //things you draw after here will not be rotated
-        //makes a cyan oval and draws it on the page at coordinates x and y on the buffered image
-       // g.setColor(Color.cyan);
-       // g.fillOval(x, y, shapeLength, shapeLength);
-        
         //draws the buffered image onto the frame
         g2.drawImage(i/* this is the image that get's drawn*/, 0, 0, frame);
         

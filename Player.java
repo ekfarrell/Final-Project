@@ -13,17 +13,27 @@ public class Player extends GameObject{
     
     public Player(int x, int y, int degrees, ID id) {
         super(x,y,degrees,id);
-        xArray = new int[] {x,x+15,x,x-15,x};
-        yArray = new int[] {y-15,y+10,y,y+10,y-15};
         
-    }
+        
+    }//end of default constructor
     
     public void tick(){
-        x+= velX;
-        y+= velY;
-    }
+        //indexs the degrees by the angular velocity
+        degrees +=  angularVelocity;
+        //index the x
+        x+= Math.cos(Math.toRadians((degrees-120)*-1)) * velY +
+        Math.sin(Math.toRadians((degrees-120)*-1)) * velX;
+        
+        y+= Math.cos(Math.toRadians((degrees-120)*-1)) * velX +
+        Math.sin(Math.toRadians((degrees-120)*-1)) * velY;
+        System.out.println((int)Math.cos(Math.toRadians((degrees-120)*-1)) * velY);
+        System.out.println((int)Math.sin(Math.toRadians((degrees-120)*-1)) * velX);
+        
+    }//end of tick method
     
     public void render(Graphics g){
+        xArray = new int[] {x,x+15,x,x-15,x};
+        yArray = new int[] {y-15,y+10,y,y+10,y-15};
         Graphics2D g2d = (Graphics2D)g;
         g.setColor(Color.red);
         AffineTransform old = g2d.getTransform();
@@ -32,15 +42,5 @@ public class Player extends GameObject{
         g.fillPolygon(xArray, yArray,5);
         g2d.setTransform(old);
         
-    }
-    
-    public void rotate(int degrees){
-        int newx = (int)Math.cos(degrees+90)*15;
-        int newy = (int)Math.sin(degrees+90)*15;
-        
-        for(int i = 0; i < this.xArray.length; i++){
-           //this.xArray[i] 
-        }
-    }
-
-}
+    }//end of render method
+}//end of player class
