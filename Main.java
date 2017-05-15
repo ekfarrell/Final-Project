@@ -27,7 +27,6 @@ public class Main {
     BufferedImage i;
     
     //position of the shape
-    int x = 500, y = 500;
     //radius/length of shape
     int shapeLength = 50;
     int degrees = 0;
@@ -79,7 +78,7 @@ public class Main {
      */
     void run(){
         init();
-        player1 = new Player(x,y,degrees,ID.Player);
+        player1 = new Player(degrees,ID.Player);
         //Make the game run until the window is closed
         while(true){
             //gets the current time
@@ -113,28 +112,24 @@ public class Main {
         if(handler.isKeyDown(KeyEvent.VK_RIGHT))
         {
             //degrees+=4;
-            player1.setAngularVelocity(4);
-            player1.tick();
-            player1.setAngularVelocity(0);
+            player1.setAngularVelocity(5);
+           
         }
         //if the left arrow key is down
         if(handler.isKeyDown(KeyEvent.VK_LEFT))
         {
             //degrees-=4;
-            player1.setAngularVelocity(-4);
-            player1.tick();
-            player1.setAngularVelocity(0);
+            player1.setAngularVelocity(-5);
         }
         //if the up arrow key is down
         if(handler.isKeyDown(KeyEvent.VK_UP))
         {
-          // x += Math.cos(Math.toRadians((degrees-120)*-1)) *  5 + Math.sin(Math.toRadians((degrees-120)*-1)) * 5;
+          player1.setVelX(-5);
+          player1.setVelY(5);
+          
+          //x += Math.cos(Math.toRadians((degrees-120)*-1)) *  5 + Math.sin(Math.toRadians((degrees-120)*-1)) * 5;
           //y -= -Math.cos(Math.toRadians((degrees-120)*-1)) * 5 + Math.sin(Math.toRadians((degrees-120)*-1)) * 5;
-          player1.setVelX(5);
-          player1.setVelY(-5);
-          player1.tick();
-          player1.setVelX(0);
-          player1.setVelY(0);
+          
            /*if(x<15)
                 x = 15;
            if(x>gameWidth)
@@ -149,9 +144,7 @@ public class Main {
         {
           player1.setVelX(-5);
           player1.setVelY(5);
-          player1.tick();
-          player1.setVelX(0);
-          player1.setVelY(0);
+          
            //x -= Math.cos(Math.toRadians((degrees-120)*-1)) *  5 + Math.sin(Math.toRadians((degrees-120)*-1)) * 5;
            //y += -Math.cos(Math.toRadians((degrees-120)*-1)) * 5 + Math.sin(Math.toRadians((degrees-120)*-1)) * 5;
            /* if(x<15)
@@ -179,7 +172,10 @@ public class Main {
      * Draws the shapes onto the image
      */
     void draw(){ 
-       
+       player1.tick();
+       player1.setVelX(0);
+       player1.setVelY(0);
+       player1.setAngularVelocity(0);
         //sets color to black and draws it to the size of the frame on the buffered image
         g.setColor(Color.black);
         g.fillRect(0, 0, gameWidth, gameHeight);
