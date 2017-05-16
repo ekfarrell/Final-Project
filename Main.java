@@ -30,7 +30,8 @@ public class Main {
     //radius/length of shape
     int shapeLength = 50;
     int degrees = 0;
-    
+    int x = 500;
+    int y = 500;
     Player player1;
     
     
@@ -48,6 +49,8 @@ public class Main {
     }
     
     void init(){
+        
+        
         //initializes the frame
         //The string inside is the name of the frame
         frame = new JFrame("Game");
@@ -78,7 +81,7 @@ public class Main {
      */
     void run(){
         init();
-        player1 = new Player(degrees,ID.Player);
+       
         //Make the game run until the window is closed
         while(true){
             //gets the current time
@@ -111,50 +114,41 @@ public class Main {
         //if the right arrow key is pressed
         if(handler.isKeyDown(KeyEvent.VK_RIGHT))
         {
-            //degrees+=4;
-            player1.setAngularVelocity(5);
-           
+            degrees+=4;
         }
         //if the left arrow key is down
         if(handler.isKeyDown(KeyEvent.VK_LEFT))
         {
-            //degrees-=4;
-            player1.setAngularVelocity(-5);
+            degrees-=4;           
         }
         //if the up arrow key is down
         if(handler.isKeyDown(KeyEvent.VK_UP))
-        {
-          player1.setVelX(-5);
-          player1.setVelY(5);
+        { 
+          x += Math.cos(Math.toRadians((degrees-120)*-1)) *  5 + Math.sin(Math.toRadians((degrees-120)*-1)) * 5;
+          y -= -Math.cos(Math.toRadians((degrees-120)*-1)) * 5 + Math.sin(Math.toRadians((degrees-120)*-1)) * 5;
           
-          //x += Math.cos(Math.toRadians((degrees-120)*-1)) *  5 + Math.sin(Math.toRadians((degrees-120)*-1)) * 5;
-          //y -= -Math.cos(Math.toRadians((degrees-120)*-1)) * 5 + Math.sin(Math.toRadians((degrees-120)*-1)) * 5;
-          
-           /*if(x<15)
+          if(x<15)
                 x = 15;
-           if(x>gameWidth)
+          if(x>gameWidth)
                 x = gameWidth;
-           if(y<30)
+          if(y<30)
                 y = 30;
-           if(y>gameWidth)
-                y = gameHeight;   */     
+          if(y>gameWidth)
+                y = gameHeight;        
         }
         //If the down arrow key is down
         if(handler.isKeyDown(KeyEvent.VK_DOWN))
         {
-          player1.setVelX(-5);
-          player1.setVelY(5);
-          
-           //x -= Math.cos(Math.toRadians((degrees-120)*-1)) *  5 + Math.sin(Math.toRadians((degrees-120)*-1)) * 5;
-           //y += -Math.cos(Math.toRadians((degrees-120)*-1)) * 5 + Math.sin(Math.toRadians((degrees-120)*-1)) * 5;
-           /* if(x<15)
+           x -= Math.cos(Math.toRadians((degrees-120)*-1)) *  5 + Math.sin(Math.toRadians((degrees-120)*-1)) * 5;
+           y += -Math.cos(Math.toRadians((degrees-120)*-1)) * 5 + Math.sin(Math.toRadians((degrees-120)*-1)) * 5;
+           if(x<15)
                 x = 15;
            if(x>gameWidth)
                 x = gameWidth;
            if(y<30)
                 y = 30;
            if(y>gameWidth)
-                y = gameHeight;*/
+                y = gameHeight;
         }
         //Moves the ship to where you click
         /*if(handler.isMouseDown(1)){
@@ -172,10 +166,7 @@ public class Main {
      * Draws the shapes onto the image
      */
     void draw(){ 
-       player1.tick();
-       player1.setVelX(0);
-       player1.setVelY(0);
-       player1.setAngularVelocity(0);
+       player1 = new Player(x,y,degrees,ID.Player);
         //sets color to black and draws it to the size of the frame on the buffered image
         g.setColor(Color.black);
         g.fillRect(0, 0, gameWidth, gameHeight);

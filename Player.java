@@ -34,11 +34,11 @@ public class Player extends GameObject{
         yArray = new int[] {y-15,y+10,y,y+10,y-15};
         Graphics2D g2d = (Graphics2D)g;
         g.setColor(Color.red);
-        //AffineTransform old = g2d.getTransform();
-        //g2d.rotate(Math.toRadians(degrees),x,y);
+        AffineTransform old = g2d.getTransform();
+        g2d.rotate(Math.toRadians(degrees),x,y);
         //draw shape/image (will be rotated)
         g.fillPolygon(xArray, yArray,5);
-        //g2d.setTransform(old);
+        g2d.setTransform(old);
         
     }//end of render method
 }//end of player class
