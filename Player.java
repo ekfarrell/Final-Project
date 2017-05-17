@@ -22,11 +22,11 @@ public class Player extends GameObject{
         //indexs the degrees by the angular velocity
         degrees +=  angularVelocity;
         //index the x
-        x+= Math.cos(Math.toRadians((degrees-120)*-1)) * velY +
-        Math.sin(Math.toRadians((degrees-120)*-1)) * velX;
+        //x+= Math.cos(Math.toRadians((degrees-120)*-1)) * velY +
+        //Math.sin(Math.toRadians((degrees-120)*-1)) * velX;
         
-        y-= -Math.cos(Math.toRadians((degrees-120)*-1)) * velY +
-        Math.sin(Math.toRadians((degrees-120)*-1)) * velX;
+        //y-= -Math.cos(Math.toRadians((degrees-120)*-1)) * velY +
+       // Math.sin(Math.toRadians((degrees-120)*-1)) * velX;
     }//end of tick method
     
     public void render(Graphics g){

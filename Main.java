@@ -8,6 +8,9 @@ import java.awt.geom.AffineTransform;
 import java.awt.Graphics2D;
 
 import javax.swing.JFrame;
+import java.util.*;
+import java.awt.*;
+import javax.swing.*;
 
 public class Main {
     
@@ -19,6 +22,8 @@ public class Main {
     //Objects
     JFrame frame;
     InputHandler handler;
+    
+    LinkedList<GameObject> objects = new LinkedList<GameObject>();
     
     //graphics for the page and graphics for the bufered image
     Graphics g2;
@@ -33,7 +38,9 @@ public class Main {
     int x = 500;
     int y = 500;
     Player player1;
-    
+    int x2 = 300;
+    int y2 = 0;
+    int size2 = 3;
     
     //Main method runs the constructor
     public static void main(String[] args) {
@@ -43,12 +50,14 @@ public class Main {
      * Main method for the constructor which runs the run method to start the game
      */
     public Main() {
+        //startup sound here
         run();
         //cleanup
         System.exit(-1);
     }
     
     void init(){
+        player1 = new Player(x,y,degrees,ID.Player);
         
         
         //initializes the frame
@@ -82,6 +91,11 @@ public class Main {
     void run(){
         init();
        
+        
+        //Main menu
+        
+        
+        
         //Make the game run until the window is closed
         while(true){
             //gets the current time
@@ -111,21 +125,28 @@ public class Main {
      * Changes the coordinates of the shape based on input
      */
     void update(){
+        
+        
+        
         //if the right arrow key is pressed
         if(handler.isKeyDown(KeyEvent.VK_RIGHT))
         {
             degrees+=4;
+            player1.setAngularVelocity(4);
         }
         //if the left arrow key is down
         if(handler.isKeyDown(KeyEvent.VK_LEFT))
         {
-            degrees-=4;           
+            degrees-=4;
+            player1.setAngularVelocity(-4);
         }
         //if the up arrow key is down
         if(handler.isKeyDown(KeyEvent.VK_UP))
         { 
-          x += Math.cos(Math.toRadians((degrees-120)*-1)) *  5 + Math.sin(Math.toRadians((degrees-120)*-1)) * 5;
-          y -= -Math.cos(Math.toRadians((degrees-120)*-1)) * 5 + Math.sin(Math.toRadians((degrees-120)*-1)) * 5;
+         player1.setX(player1.getX() + (int)(Math.cos(Math.toRadians((degrees-120)*-1)) *  5 + (Math.sin(Math.toRadians((degrees-120)*-1)) * 5)));
+         player1.setY(player1.getY() - (int)(-Math.cos(Math.toRadians((degrees-120)*-1)) * 5 + Math.sin(Math.toRadians((degrees-120)*-1)) * 5));
+         // x += Math.cos(Math.toRadians((degrees-120)*-1)) *  5 + Math.sin(Math.toRadians((degrees-120)*-1)) * 5;
+         //y -= -Math.cos(Math.toRadians((degrees-120)*-1)) * 5 + Math.sin(Math.toRadians((degrees-120)*-1)) * 5;
           
           if(x<15)
                 x = 15;
@@ -139,8 +160,10 @@ public class Main {
         //If the down arrow key is down
         if(handler.isKeyDown(KeyEvent.VK_DOWN))
         {
-           x -= Math.cos(Math.toRadians((degrees-120)*-1)) *  5 + Math.sin(Math.toRadians((degrees-120)*-1)) * 5;
-           y += -Math.cos(Math.toRadians((degrees-120)*-1)) * 5 + Math.sin(Math.toRadians((degrees-120)*-1)) * 5;
+            player1.setX(player1.getX() - (int)(Math.cos(Math.toRadians((degrees-120)*-1)) *  5 + (Math.sin(Math.toRadians((degrees-120)*-1)) * 5)));
+            player1.setY(player1.getY() + (int)(-Math.cos(Math.toRadians((degrees-120)*-1)) * 5 + Math.sin(Math.toRadians((degrees-120)*-1)) * 5));
+          // x -= Math.cos(Math.toRadians((degrees-120)*-1)) *  5 + Math.sin(Math.toRadians((degrees-120)*-1)) * 5;
+          // y += -Math.cos(Math.toRadians((degrees-120)*-1)) * 5 + Math.sin(Math.toRadians((degrees-120)*-1)) * 5;
            if(x<15)
                 x = 15;
            if(x>gameWidth)
@@ -166,11 +189,27 @@ public class Main {
      * Draws the shapes onto the image
      */
     void draw(){ 
-       player1 = new Player(x,y,degrees,ID.Player);
+       g.setColor(Color.black);
+       g.fillRect(0, 0, gameWidth, gameHeight);
+        
+        objects.add(player1);
+       //objects.add(new Player(x,y,degrees,ID.Player));
+       //objects.add(new Asteroid(x2,y2,degrees,size2,ID.Player));
+       
+       for (int i = 0; i < objects.size(); i++){
+           objects.get(i).tick();
+           objects.get(i).render(g);
+           if (objects.get(i).getId() == ID.Player){
+               objects.get(i).setAngularVelocity(0);
+               
+            }
+       }
+       
+       
+       
         //sets color to black and draws it to the size of the frame on the buffered image
-        g.setColor(Color.black);
-        g.fillRect(0, 0, gameWidth, gameHeight);
-        player1.render(g);
+        
+       // player1.render(g);
         //draws the buffered image onto the frame
         g2.drawImage(i/* this is the image that get's drawn*/, 0, 0, frame);
         
