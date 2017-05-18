@@ -1,0 +1,13 @@
+#BlueJ class context
+comment0.params=x\ y\ degrees\ id
+comment0.target=Bullet(int,\ int,\ int,\ ID)
+comment0.text=\r\n\ Default\ constructor\ for\ objects\ of\ class\ Bullet\r\n
+comment1.params=
+comment1.target=int\ getRadius()
+comment2.params=
+comment2.target=void\ tick()
+comment3.params=g
+comment3.target=void\ render(java.awt.Graphics)
+comment4.params=objects
+comment4.target=boolean\ hitReg(java.util.LinkedList)
+numComments=5
