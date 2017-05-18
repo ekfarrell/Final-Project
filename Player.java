@@ -10,11 +10,11 @@ public class Player extends GameObject{
     int velX;
     int velY;
     private InputHandler handler;
+    boolean isShooting;
     
 
     public Player(int x, int y, int degrees, ID id) {
         super(x,y,degrees,id);
-        
         
     }//end of default constructor
     
@@ -41,4 +41,9 @@ public class Player extends GameObject{
         g2d.setTransform(old);
         
     }//end of render method
+    
+    /*public boolean shoot(){
+        isShooting = true;
+        return isShooting;
+    }*/
 }//end of player class

@@ -125,53 +125,50 @@ public class Main {
      * Changes the coordinates of the shape based on input
      */
     void update(){
-        
-        
-        
         //if the right arrow key is pressed
         if(handler.isKeyDown(KeyEvent.VK_RIGHT))
         {
-            degrees+=4;
-            player1.setAngularVelocity(4);
+            degrees+=5;
+            //player1.setAngularVelocity(5);
         }
         //if the left arrow key is down
         if(handler.isKeyDown(KeyEvent.VK_LEFT))
         {
-            degrees-=4;
-            player1.setAngularVelocity(-4);
+            degrees-=5;
+            //player1.setAngularVelocity(-5);
         }
         //if the up arrow key is down
         if(handler.isKeyDown(KeyEvent.VK_UP))
         { 
-         player1.setX(player1.getX() + (int)(Math.cos(Math.toRadians((degrees-120)*-1)) *  5 + (Math.sin(Math.toRadians((degrees-120)*-1)) * 5)));
-         player1.setY(player1.getY() - (int)(-Math.cos(Math.toRadians((degrees-120)*-1)) * 5 + Math.sin(Math.toRadians((degrees-120)*-1)) * 5));
+         player1.setX(player1.getX() + (int)(Math.cos(Math.toRadians((degrees-130)*-1)) *  5 + (Math.sin(Math.toRadians((degrees-130)*-1)) * 5)));
+         player1.setY(player1.getY() - (int)(-Math.cos(Math.toRadians((degrees-130)*-1)) * 5 + Math.sin(Math.toRadians((degrees-130)*-1)) * 5));
          // x += Math.cos(Math.toRadians((degrees-120)*-1)) *  5 + Math.sin(Math.toRadians((degrees-120)*-1)) * 5;
          //y -= -Math.cos(Math.toRadians((degrees-120)*-1)) * 5 + Math.sin(Math.toRadians((degrees-120)*-1)) * 5;
           
-          if(x<15)
-                x = 15;
-          if(x>gameWidth)
-                x = gameWidth;
-          if(y<30)
-                y = 30;
-          if(y>gameWidth)
-                y = gameHeight;        
+          if(player1.getX()<15)
+                player1.setX(15);
+          if(player1.getX()>gameWidth)
+                player1.setX(gameWidth);
+          if(player1.getY()<30)
+                player1.setY(30);
+          if(player1.getY()>gameWidth)
+                player1.setY(gameHeight);        
         }
         //If the down arrow key is down
         if(handler.isKeyDown(KeyEvent.VK_DOWN))
         {
-            player1.setX(player1.getX() - (int)(Math.cos(Math.toRadians((degrees-120)*-1)) *  5 + (Math.sin(Math.toRadians((degrees-120)*-1)) * 5)));
-            player1.setY(player1.getY() + (int)(-Math.cos(Math.toRadians((degrees-120)*-1)) * 5 + Math.sin(Math.toRadians((degrees-120)*-1)) * 5));
+            player1.setX(player1.getX() - (int)(Math.cos(Math.toRadians((player1.getDegrees()-130)*-1)) *  5 + (Math.sin(Math.toRadians((player1.getDegrees()-130)*-1)) * 5)));
+            player1.setY(player1.getY() + (int)(-Math.cos(Math.toRadians((degrees-130)*-1)) * 5 + Math.sin(Math.toRadians((degrees-130)*-1)) * 5));
           // x -= Math.cos(Math.toRadians((degrees-120)*-1)) *  5 + Math.sin(Math.toRadians((degrees-120)*-1)) * 5;
           // y += -Math.cos(Math.toRadians((degrees-120)*-1)) * 5 + Math.sin(Math.toRadians((degrees-120)*-1)) * 5;
-           if(x<15)
-                x = 15;
-           if(x>gameWidth)
-                x = gameWidth;
-           if(y<30)
-                y = 30;
-           if(y>gameWidth)
-                y = gameHeight;
+          if(player1.getX()<15)
+                player1.setX(15);
+          if(player1.getX()>gameWidth)
+                player1.setX(gameWidth);
+          if(player1.getY()<30)
+                player1.setY(30);
+          if(player1.getY()>gameWidth)
+                player1.setY(gameHeight);
         }
         //Moves the ship to where you click
         /*if(handler.isMouseDown(1)){
@@ -199,6 +196,7 @@ public class Main {
        for (int i = 0; i < objects.size(); i++){
            objects.get(i).tick();
            objects.get(i).render(g);
+           g.fillOval(300,300,50,50);
            if (objects.get(i).getId() == ID.Player){
                objects.get(i).setAngularVelocity(0);
                
